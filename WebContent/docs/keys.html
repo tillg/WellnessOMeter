@@ -1,0 +1,211 @@
+<?php ob_start('ob_gzhandler') ?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <!--
+        /**
+        * o------------------------------------------------------------------------------o
+        * | This file is part of the RGraph package - you can learn more at:             |
+        * |                                                                              |
+        * |                          http://www.rgraph.net                               |
+        * |                                                                              |
+        * | This package is licensed under the RGraph license. For all kinds of business |
+        * | purposes there is a small one-time licensing fee to pay and for non          |
+        * | commercial  purposes it is free to use. You can read the full license here:  |
+        * |                                                                              |
+        * |                      http://www.rgraph.net/LICENSE.txt                       |
+        * o------------------------------------------------------------------------------o
+        */
+    -->
+    <title>RGraph: HTML5 canvas graph library - Examples of keys</title>
+    <link rel="stylesheet" href="../css/website.css" type="text/css" media="screen" />
+    <link rel="icon" type="image/png" href="../favicon.png">
+    
+    <script src="../libraries/RGraph.common.core.js" ></script>
+    <script src="../libraries/RGraph.line.js" ></script>
+    <script src="../libraries/RGraph.pie.js" ></script>
+    <!--[if IE 8]><script src="../excanvas/excanvas.compressed.js"></script><![endif]-->
+    
+    <script>
+        window.onload = function ()
+        {
+            var pie = new RGraph.Pie('myPie', [45,43,23,68,84,41]);
+            pie.Set('chart.title', 'A pie chart showing graph mode');
+            pie.Set('chart.key', ['John','Fred','Lou','Pete','Kevin','Gary']);
+            pie.Set('chart.key.rounded', false);
+            
+            pie.Set('chart.key.shadow', true);
+            pie.Set('chart.key.shadow.offsetx', 3);
+            pie.Set('chart.key.shadow.offsety', 3);
+            pie.Set('chart.key.shadow.blur', 0);
+            pie.Set('chart.key.shadow.color', '#aaa');
+
+            pie.Draw();
+
+            var line = new RGraph.Line('myLine', [8,4,2,5,6,4,3,7,8,9,7,6], [4,3,1,6,5,8,4,9,8,7,4,6]);
+            line.Set('chart.key', ['Richard', 'Fred']);
+            line.Set('chart.title', 'A line chart showing the key in gutter mode');
+            line.Set('chart.key.position', 'gutter');
+            line.Set('chart.key.position.y', line.canvas.height - 45); // 45 pixels from the bottom
+            line.Set('chart.key.shadow', true);
+            line.Set('chart.key.shadow.offsetx', 0);
+            line.Set('chart.key.shadow.offsety', 0);
+            line.Set('chart.key.shadow.blur', 15);
+            line.Set('chart.key.shadow.color', '#ccc');
+            line.Set('chart.hmargin', 5);
+            line.Set('chart.linewidth', 3);
+            line.Set('chart.labels', ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']);
+            line.Draw();
+        }
+    </script>
+</head>
+<body>
+
+    <!-- Social networking buttons -->
+    
+    <script>
+        function HideTwitterDIV ()
+        {
+            document.getElementById("twitter_div").style.opacity = 0;
+            document.getElementById("twitter_div").style.display = 'none';
+        }
+
+
+        function ShowTwitterDIV (e)
+        {
+            var e   = RGraph.FixEventObject(document.all ? event : e);
+            var div = document.getElementById("twitter_div");
+            var img = document.getElementById("twitter_icon");
+
+            div.style.display = 'block';
+            div.style.left    = (RGraph.getCanvasXY(img)[0] + img.offsetWidth - div.offsetWidth + 110) + 'px';
+            div.style.top     = (RGraph.getCanvasXY(img)[1] - 1) + 'px';
+
+            /**
+            * Fade it in
+            */
+            setTimeout('document.getElementById("twitter_div").style.opacity = 0.2;', 25);
+            setTimeout('document.getElementById("twitter_div").style.opacity = 0.4;', 50);
+            setTimeout('document.getElementById("twitter_div").style.opacity = 0.6;', 100);
+            setTimeout('document.getElementById("twitter_div").style.opacity = 0.8;', 125);
+            setTimeout('document.getElementById("twitter_div").style.opacity = 1.0;', 150);
+
+            e.stopPropagation();
+
+            return false;
+        }
+
+        /**
+        * This code installs the event handler that hides the Twitter DIV
+        */
+        if (RGraph.isIE8()) {
+             window.attachEvent('onload', function () {document.body.attachEvent('onclick', HideTwitterDIV);});
+        } else {
+            window.addEventListener('click', HideTwitterDIV, false);
+        }
+    </script>
+
+    <!-- The twitter DIV --> 
+    <div id="twitter_div" style="position: absolute;top: 0;left: 0;background-color: #eee;border: 2px dashed black;box-shadow: 0 0 15px #aaa;-moz-box-shadow: 0 0 15px #aaa;-webkit-box-shadow: 0 0 15px #aaa;padding: 3px;display: none;opacity: 0;z-index: 99;"> 
+        <a href="http://twitter.com/home/?status=RGraph%3A+HTML5+canvas+graph+library+based+on+the+HTML5+canvas+tag+http%3A%2F%2Fwww.rgraph.net+%23rgraph+%23html5+%23canvas" target="_blank" title="Share on Twitter" rel="nofollow" style="text-decoration: none">Tweet&nbsp;about&nbsp;RGraph</a><br>
+        <a href="http://twitter.com/_rgraph" style="text-decoration: none" rel="nofollow" target="_blank">Follow for HTML5 news</a> 
+    </div>
+
+    <div id="social_icons" class="warning" style="top: 0; left: 5px; position: absolute">
+        <script>
+            // Opera fix
+            if (navigator.userAgent.indexOf('Opera') == -1) {
+              document.getElementById("social_icons").style.position = 'fixed';
+              document.getElementById("twitter_div").style.position = 'fixed';
+    
+            }
+        </script>
+    
+        <b style="display: inline-block; position: relative; top: 1px">Bookmark and share:</b>
+    
+    
+            <div id="social">
+                <a title="Bookmark with delicious" href="http://delicious.com/save?jump=close&v=4&noui&jump=close&url=http://www.rgraph.net&notes=RGraph%20is%20a%20HTML5%20based%20graph%20library%20supporting%20a%20wide%20range%20of%20different%20graph%20types:Bar,%20Bipolar,%20Donut,%20Funnel,%20Gantt,%20Horizontal%20Bar,%20LED,%20Line,%20Meter,%20Odometer,%20Pie,%20Progress%20Bar,%20Rose,%20RScatter,%20Scatter%20and%20Traditional%20Radar&title=RGraph:%20HTML5%20canvas%20graph%20library%20based%20on%20the%20HTML5%20canvas%20tag" target="_blank">
+                    <img src="../images/delicious.png" alt="Bookmark with delicious" width="22" height="22" border="0" align="absmiddle" /> 
+                </a> 
+     
+                <a href="" target="_blank" onmouseover="if (document.getElementById('twitter_div').style.display == 'none') ShowTwitterDIV(event);" onclick="event.stopPropagation(); event.cancelBubble = true; return false">
+                    <img src="../images/twitter.png" id="twitter_icon" alt="tweet this site" width="22" height="22" border="0" align="absmiddle" />
+                </a>
+    
+    
+<!--
+                <a title="Post to Google Buzz!" href="" onclick="window.open('http://www.google.com/buzz/post?url=http://www.rgraph.net&imageurl=http://www.rgraph.net/images/logo.png', 'google_buzz_window', 'width=800,height=400,top=100,left=100'); return false">
+                    <img src="../images/buzz.png" width="22" height="22" alt="Post to Google Buzz!" align="absmiddle" style="position: relative; top: -2px; border: 0" border="0"/>
+                </a>
+    
+    
+                <a title="Share RGraph on Facebook" href="" onclick="window.open('http://www.facebook.com/sharer.php?u=http://www.rgraph.net&t=RGraph:%20HTML5%20canvas%20graph%20library', 'facebook_window', 'width=500,height=300,top=100,left=100'); return false">
+                    <img src="../images/facebook.png" width="22" height="22" alt="Post to Facebook" align="absmiddle" style="position: relative; top: -2px; border: 0" border="0"/>
+                </a>
+    
+                <a href="mailto:share@friendfeed.com" title="Share on FriendFeed"> 
+                    <img src="../images/friendfeed.png" width="22" height="22" alt="Share on FriendFeed" border="0" align="absmiddle" /> 
+                </a>
+    
+                <a href="http://www.stumbleupon.com/submit?url=http://www.rgraph.net" target="_blank" title="Share on StumbleUpon" >
+                    <img src="../images/stumble.png" alt="Stumble! this site" width="22" height="22" border="0" align="absmiddle" /> 
+                </a>
+-->
+            </div>
+    </div>
+    <!-- /Social networking buttons -->
+
+    <div id="breadcrumb">
+        <a href="../index.html">RGraph: HTML5 canvas graph library</a>
+        >
+        <a href="index.html">Documentation</a>
+        >
+        Examples of keys
+    </div>
+
+    <h1>RGraph: HTML5 canvas graph library - Examples of keys</h1>
+
+    <div style="float: right; display: inline-block; width: 650px">
+        <canvas id="myLine" width="600" height="250" style="float: right">[No canvas support]</canvas>
+        <canvas id="myPie" width="450" height="250" style="float: right">[No canvas support]</canvas>
+    </div>
+
+    <p>
+        As of 4th December 2010 the code that produces the keys has been rewritten. There are two variants of keys available,
+        a horizontal one designed to sit in the gutter, and a vertical one that is designed to sit on top of (ie over) the graph.
+    </p>
+    
+    <p>
+        The actual positioning is now configurable though, so you could have a horizontal key and position it to sit on top
+        of the chart.
+    </p>
+    
+    <h4>Key properties</h4>
+    
+    <p>
+        The available key properties and their defaults are listed below (some graph types have slightly different defaults to
+        suit):
+    </p>
+
+
+    <ul>
+        <li>chart.key (<i>[] (An empty array)</i>)</li>
+        <li>chart.key.position (<i>graph</i>)</li>
+        <li>chart.key.position.gutter.boxed (<i>true</i>)</li>
+        <li>chart.key.position.x (<i>null</i>)</li>
+        <li>chart.key.position.y (<i>null</i>)</li>
+        <li>chart.key.shadow (<i>false</i>)</li>
+        <li>chart.key.shadow.offsetx (<i>2</i>)</li>
+        <li>chart.key.shadow.offsety (<i>2</i>)</li>
+        <li>chart.key.shadow.color (<i>#666</i>)</li>
+        <li>chart.key.shadow.blur (<i>3</i>)</li>
+        <li>chart.key.color.shape (<i>square</i>)</li>
+        <li>chart.key.background (<i>white</i>)</li>
+        <li>chart.key.rounded (<i>true</i>)</li>
+        <li>chart.key.text.size (<i>10</i>)</li>
+    </ul>
+
+</body>
+</html>
